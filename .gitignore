@@ -1,0 +1,5 @@
+.git
+sources/__pycache__
+sources/google_key
+*.swp
+data
