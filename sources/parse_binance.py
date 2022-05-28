@@ -3,8 +3,22 @@ from coins import coins
 import requests
 import json
 from datetime import datetime
-#http://www.binance.com/api/v3/ticker/price?symbol=BNBBTC
-# print(coins)
+
+class ParseBinanceSpot():
+    def __init__(self) -> None:
+        self.url = 'http://www.binance.com/api/v3/ticker/price'
+        self.params = '?symbol='
+
+    def getPrice(self, fiat, coin):
+        data = {}
+        r = requests.get(self.url+self.params+fiat+coin, stream=True)
+        data = json.loads(r.text)
+        if data.get('code'):
+            r = requests.get(self.url+self.params+coin+fiat, stream=True)
+            data = json.loads(r.text)
+            if data.get('code'):
+                return -1
+        return data
 
 def getPrice(fiat, coin):
     data = {}

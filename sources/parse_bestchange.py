@@ -1,5 +1,3 @@
-from itertools import count
-from locale import currency
 import requests, zipfile
 from io import BytesIO as si
 import csv
@@ -30,16 +28,14 @@ class BestChange:
         print("_______________________Считали валюту_______________________")
         self.exch = {} # Обменники
         with open("./data/bm_exch.dat", encoding="cp1251") as file:
-            # Создаем объект reader, указываем символ-разделитель ","
             file_reader = csv.reader(file, delimiter = ";")
             for row in file_reader:
                 self.exch[int(row[0])] = row[1]
        
         print("_______________________Считали обменники_______________________")
 
-        self.rates = {}
+        self.rates = {} # Курсы
         with open("./data/bm_rates.dat", encoding="cp1251") as file:
-            # Создаем объект reader, указываем символ-разделитель ","
             file_reader = csv.reader(file, delimiter = ";")
             count = 0
             for row in file_reader:
@@ -54,10 +50,6 @@ class BestChange:
         for i in self.cur.keys():
             if self.cur[i][0] == id:
                 return self.cur[i][3]
-
-    # def getIdCur(self, nameCurAndWallet):
-    #     for self.cur as 
-    #     return self.cur.keys[nameCurAndWallet]
 
     def getWallet(self, fiat):
         for i in self.cur:
@@ -77,7 +69,6 @@ class BestChange:
     def getAllRates(self, id_send, id_recv):
 
         for k in self.rates.keys():
-            #print(int(self.rates[k][0]))
             if int(self.rates[k][0]) == id_send and int(self.rates[k][1]) == id_recv:
                 yield k
         
