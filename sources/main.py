@@ -1,7 +1,7 @@
 from operator import ge
-import parse_bestchange
+from best_change import parse_bestchange
 import coins
-import parse_binance
+from binance import parse_binance
 
 def findWallet(wallets, wallet):
     for i in wallets:
@@ -40,7 +40,7 @@ if __name__ == "__main__":
                 print("НЕ НАЙДЕНО")
                 break
 
-        
+
     bank = int(input("Введите сумму:\n"))
     # Перебор всех валют
     print("ID: "+ str(wallets[idx][0]))
@@ -101,4 +101,12 @@ if __name__ == "__main__":
     print("СПРЕД: " + str(res['spred']))
         
     # RUB / ETH, RUB / BTC ...
+
+# Банк - Обменник - БинансP2P - Банк
+# Банк - БинансP2P - Обменник - Банк
+# Банк - БинансP2P - БинансP2P- Банк
+
+# Банк - Обменник - БинансSpot - БинансP2P - Банк
+# Банк - БинансP2P - БинансSpot - Обменник - Банк
+# Банк - БинансP2P - БинансSpot - БинансP2P- Банк
 

@@ -4,3 +4,5 @@ sources/google_key
 *.swp
 data
 sources/test.py
+__pycache__
+bd_query
