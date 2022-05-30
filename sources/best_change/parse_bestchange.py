@@ -2,6 +2,8 @@ import requests, zipfile
 from io import BytesIO as si
 import csv
 
+#TODO: завести все данные в БД и работать с ней
+
 class BestChange:
     def __init__(self) -> None:
         self.timeout = 60
@@ -14,7 +16,6 @@ class BestChange:
         print("Updating is done")
 
     def parse(self):
-
         self.cur = {} # Валюта
         with open("./data/bm_cy.dat", encoding="cp1251") as bm_cy:
             # Создаем объект reader, указываем символ-разделитель ","
