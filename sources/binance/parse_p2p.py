@@ -1,4 +1,3 @@
-import json
 from sre_constants import MIN_UNTIL
 import gspread
 import httplib2
@@ -9,7 +8,6 @@ import sys
 sys.path.append('../sources')
 import toList as toList
 import datetime
-import time
 import math
 
 

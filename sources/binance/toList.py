@@ -1,5 +1,3 @@
-
-
 def toList(data):
     return {
             "Tinkoff": 
