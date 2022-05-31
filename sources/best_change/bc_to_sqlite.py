@@ -3,19 +3,14 @@ import csv
 
 #Класс записи в БД информации обменников
 class BestChangeToSqlite:
-    def __init__(self) -> None:
-        self.con = sqlite3.connect('data/data.db')
-        self.cur = self.con.cursor()
-        self.update()
+    def __init__(self, cur) -> None:
+        self.cur = cur
+        #self.update()
         
     def update(self):
         self.parseCurrency()
         self.parseExch()
         self.parseRates()
-
-    def __del__(self):
-        self.con.commit()
-        self.con.close()
 
     def parseCurrency(self):
         file = open('data/bm_cy.dat')
