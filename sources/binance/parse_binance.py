@@ -4,13 +4,11 @@ import requests
 import json
 from datetime import datetime
 
-
-# TODO: Получить все курсы и распарсить
 class ParseBinanceSpot():
     def __init__(self) -> None:
         self.url = 'http://www.binance.com/api/v3/ticker/price'
-        self.params = '?symbol='
-        self.update()
+        self.first_update = True
+        self.timeout = 60
 
     def getPrice(self, fiat, coin):
         if fiat + coin in self.data.keys():
@@ -23,11 +21,21 @@ class ParseBinanceSpot():
     def getAllPrice(self):
         return self.data
 
-    def update(self):
+    def update(self) -> bool:
+        time_delta = 0
+        if self.first_update:
+            self.first_update = False
+        else:
+            self.time_now = datetime.datetime.now()
+            time_delta = self.time_now - self.time_update
+            if time_delta.seconds < self.timeout:
+                return False
+
         self.tikers = {}
         r = requests.get(self.url, stream=True)
         self.tikers = json.loads(r.text)
         self.toNormal()
+        return True
 
     def toNormal(self):
         self.data = {}
@@ -36,5 +44,6 @@ class ParseBinanceSpot():
 
 if __name__ == "__main__":
     pbs = ParseBinanceSpot()
+    pbs.update()
     price = pbs.getPrice("RUB", "BTC")
     print(price)

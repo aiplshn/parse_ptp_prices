@@ -54,6 +54,7 @@ class P2PParse:
         return datetime.timedelta(hours=self.hour, minutes=self.minute, seconds=self.second)
 
     #TODO add fiat
+    # Убрать few и low
     def getPrice(self, payType, asset, trade_type, transAmount):
         if transAmount == 1000:
             return self.data_list[payType][asset][trade_type]["few"]
@@ -65,7 +66,7 @@ class P2PParse:
         now_time = datetime.timedelta(hours=now.hour, minutes=now.minute, seconds=now.second)
         update_time = datetime.timedelta(hours=self.hour, minutes=self.minute, seconds=self.second)
         delta = now_time - update_time
-        if delta.seconds / 60 > 10:
+        if delta.seconds / 60 > 15:
             self.parseData()
             return True
         else:
