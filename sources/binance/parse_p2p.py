@@ -57,9 +57,23 @@ class P2PParse:
     # Убрать few и low
     def getPrice(self, payType, asset, trade_type, transAmount):
         if transAmount == 1000:
-            return self.data_list[payType][asset][trade_type]["few"]
+            if payType in self.data_list:
+                if asset in self.data_list[payType]:
+                    if trade_type in self.data_list[payType][asset]:
+                        return self.data_list[payType][asset][trade_type]["few"]
+                    else:
+                        return -1
+                else: 
+                    return -1
         else:
-            return self.data_list[payType][asset][trade_type]["lot"]
+            if payType in self.data_list:
+                if asset in self.data_list[payType]:
+                    if trade_type in self.data_list[payType][asset]:
+                        return self.data_list[payType][asset][trade_type]["lot"]
+                    else:
+                        return -1
+                else: 
+                    return -1
 
     def update(self) -> bool:
         now = datetime.datetime.now().time()

@@ -27,5 +27,5 @@ class ControllerBinance:
 
 if __name__ == "__main__":
     cb = ControllerBinance()
-    print(cb.getPricePtP("RUB", "RosBank", "BTC","SELL", 10000))
+    print(cb.getPricePtP("RUB", "RosBank", "BTC1","SELL", 10000))
     print(cb.getPriceSpot("RUB", "BTC"))
