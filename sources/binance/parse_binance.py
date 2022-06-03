@@ -12,11 +12,11 @@ class ParseBinanceSpot():
 
     def getPrice(self, fiat, coin):
         if fiat + coin in self.data.keys():
-            return self.data[fiat+coin]
+            return self.data[fiat+coin], 0
         elif coin + fiat in self.data.keys():
-            return self.data[coin+fiat]
+            return self.data[coin+fiat], 1
         else: 
-            return -1
+            return -1, -1
 
     def getAllPrice(self):
         return self.data
@@ -26,7 +26,7 @@ class ParseBinanceSpot():
         if self.first_update:
             self.first_update = False
         else:
-            self.time_now = datetime.datetime.now()
+            self.time_now = datetime.now()
             time_delta = self.time_now - self.time_update
             if time_delta.seconds < self.timeout:
                 return False
@@ -35,6 +35,7 @@ class ParseBinanceSpot():
         r = requests.get(self.url, stream=True)
         self.tikers = json.loads(r.text)
         self.toNormal()
+        self.time_update = datetime.now()
         return True
 
     def toNormal(self):

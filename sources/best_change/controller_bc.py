@@ -16,8 +16,8 @@ class BCController():
         if self.dbc.update():
             self.bcts.update()
         
-    def getBestPriceExch(self, fiat:str, coin:str, transAmount:str, bank:str):
-        return self.bcdb.getPrice(fiat, coin, transAmount, bank)
+    def getBestPriceExch(self, fiat:str, coin:str, transAmount:str, bank:str, buy:bool):
+        return self.bcdb.getPrice(fiat, coin, transAmount, bank, buy)
 
 
 if __name__ == "__main__":
