@@ -24,7 +24,7 @@ class DownloadBestChange:
 
         r = requests.get(self.zip_file_url, stream=True)
         z = zipfile.ZipFile(si(r.content))
-        z.extractall("data")
+        z.extractall("parse_best_change/data")
         self.time_update = datetime.datetime.now()
         return True
 

@@ -6,3 +6,4 @@ data
 sources/test.py
 __pycache__
 bd_query
+.xlsx

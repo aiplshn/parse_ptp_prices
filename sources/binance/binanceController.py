@@ -1,5 +1,5 @@
-from parse_binance import ParseBinanceSpot
-from parse_p2p import P2PParse
+from parse_best_change.sources.binance.parse_binance import ParseBinanceSpot
+from parse_best_change.sources.binance.parse_p2p import P2PParse
 
 # Класс контролер Binance
 class ControllerBinance:

@@ -1,14 +1,13 @@
+from audioop import minmax
 import sqlite3
 import csv
-import bc_to_sqlite
-
+import parse_best_change.sources.best_change.bc_to_sqlite
+from parse_best_change.sources.best_change.db import DataBase
 
 #Класс работы с бд
 class BestChangeDB:
-    def __init__(self, cur) -> None:
-        self.cur = cur
     
-    def getPrice(self, fiat:str, coin:str, transAmount:str, bank:str, buy:bool):
+    def getPrice(self, fiat:str, coin:str, transAmount:str, bank:str, buy:bool, db:DataBase):
         # 1. Получить id fiat
         # 2. Получить id coin (несколько)
         # 3. Найти наилучший курс и выдать обменник (Учесть резерв и сумму)
@@ -35,11 +34,12 @@ class BestChangeDB:
             (select id from currency where coin like "{coin}%")
             and r.min_sum <= {transAmount} and r.id_town = 0 GROUP BY r.id_given_cur
         """
+        cur = db.getCur()
         if buy:
-            self.cur.execute(query_buy)
+            cur.execute(query_buy)
         else:
-            self.cur.execute(query_sell)
-        data = self.cur.fetchall()
+            cur.execute(query_sell)
+        data = cur.fetchall()
         if len(data) != 0:
             return data
         else:

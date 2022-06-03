@@ -1,16 +1,40 @@
-from best_change.controller_bc import BCController
-from binance.binanceController import ControllerBinance
+from ast import While
+from cgi import test
+from parse_best_change.sources.best_change.controller_bc import BCController
+from parse_best_change.sources.binance.binanceController import ControllerBinance
+import threading
+import time
+import datetime
 
 # Класс контролер курсов
 class ControllerPrices:
     def __init__(self):
         self.best_change_controller = BCController()
         self.binance_controller = ControllerBinance()
-        self.update()
+        #self.update()
+        threading.Timer(1, self.update).start()
+
+    def newConnection(self) -> int:
+        return self.best_change_controller.newConnection()
+
+    def closeConnection(self, id: int):
+        self.best_change_controller.closeConnection(id)
+
+    def test(self):
+        while True:
+            time.sleep(10)
+            now = datetime.datetime.now()
+            print("Time out"+str(now))
 
     def update(self):
-        self.best_change_controller.update()
-        self.binance_controller.update()
+        while True:
+            self.best_change_controller.update()
+            self.binance_controller.update()
+            time.sleep(960)            
+            now = datetime.datetime.now()
+            print("Time out "+str(now))
+
+    #TODO add close all connection (destructor)
 
     def getSpotPrice(self, fiat:str, coin:str, transAmount:float):
         #return self.binance_controller.getPriceSpot(fiat, coin)
@@ -53,9 +77,9 @@ class ControllerPrices:
         out = transAmount * price
         return {'coin': asset, 'price':price, 'out': out}
 
-    def getBestPricesBestChangeForBuy(self, fiat:str, coin:str, transAmount:str, bank:str):
+    def getBestPricesBestChangeForBuy(self, fiat:str, coin:str, transAmount:str, bank:str, id_connection: int):
         #return self.best_change_controller.getBestPriceExch(fiat, coin, transAmount, bank, True)
-        prices = self.best_change_controller.getBestPriceExch(fiat, coin, transAmount, bank, True)
+        prices = self.best_change_controller.getBestPriceExch(fiat, coin, transAmount, bank, True, id_connection)
 
         if prices == -1:
             return -1
@@ -75,9 +99,9 @@ class ControllerPrices:
             mas.append(data)
         return mas
     
-    def getBestPricesBestChangeForSell(self, fiat:str, coin:str, transAmount:str, bank:str):
+    def getBestPricesBestChangeForSell(self, fiat:str, coin:str, transAmount:str, bank:str, id_connection: int):
         #return self.best_change_controller.getBestPriceExch(fiat, coin, transAmount, bank, False)
-        prices = self.best_change_controller.getBestPriceExch(fiat, coin, transAmount, bank, False)
+        prices = self.best_change_controller.getBestPriceExch(fiat, coin, transAmount, bank, False, id_connection)
         
         if prices == -1:
             return -1

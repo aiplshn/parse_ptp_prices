@@ -6,7 +6,7 @@ from gspread_dataframe import get_as_dataframe
 from oauth2client.service_account import ServiceAccountCredentials
 import sys
 sys.path.append('../sources')
-import toList as toList
+from parse_best_change.sources.binance import toList
 import datetime
 import math
 
@@ -16,7 +16,7 @@ class GoogleSheetsParse:
         self.scope = ['https://www.googleapis.com/auth/drive',
                       'https://www.googleapis.com/auth/spreadsheets']
         self.credentials = ServiceAccountCredentials.from_json_keyfile_name(
-                            'sources/google_key/creg.json',
+                            'parse_best_change/sources/google_key/creg.json',
                             self.scope)
         self.google_spreadsheet_connection = gspread.authorize(self.credentials)
         self.wks = self.google_spreadsheet_connection.open("binance test")
