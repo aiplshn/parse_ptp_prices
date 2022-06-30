@@ -24,9 +24,6 @@ class Bundles:
                 continue
             
             for coin2 in coins:
-                # priceSpot = {}
-                if coin1 == 'RUB' and coin2 == 'SHIB':
-                    continue
                 priceSpot = cp.getSpotPrice(coin1, coin2, priceP2P['out']) #{}
                 if priceSpot == -1:
                     continue
@@ -79,8 +76,13 @@ class Bundles:
                     spreed = Spreed(bank, exch['p2p']['out'])
                     if spreed < spd:
                         continue
+                    opt = ''
+                    if exch['p2p']['few']:
+                        opt = 'оптом'
+                    else:
+                        opt = 'в розницу (от 1000)'
                     mes = f"""Покупаем {key1} на BestChange: обменник {exch['exch']} по курсу {exch['price']} -> {exch['out']}
-    Продаем {key1} на P2P по курсу {exch['p2p']['price']}
+    Продаем {key1} на P2P по курсу {exch['p2p']['price']} {opt}
     Получаем {exch['p2p']['out']}
     Спред {spreed}"""
                     mas.append(mes)
@@ -98,8 +100,6 @@ class Bundles:
             for exch1 in priceExch1:
                 priceSpot = {}
                 for coin2 in coins:
-                    if coin1 == 'RUB' and coin2 == 'SHIB':
-                        continue
                     priceSpot = cp.getSpotPrice(coin1, coin2, exch1['out']) #{}
                     if priceSpot == -1:
                         continue
@@ -140,8 +140,6 @@ class Bundles:
             for exch in priceExch:
                 priceSpot = {}
                 for coin2 in coins:
-                    if coin1 == 'RUB' and coin2 == 'SHIB':
-                        continue
                     priceSpot = cp.getSpotPrice(coin1, coin2, exch['out']) #{}
                     if priceSpot == -1:
                         continue
@@ -162,9 +160,15 @@ class Bundles:
                             spreed = Spreed(bank, exch1[coin1]['p2p']['out'])
                             if spreed < spd:
                                 continue
+                            opt = ''
+                            if exch1[coin1]['p2p']['few']:
+                                opt = 'оптом'
+                            else:
+                                opt = 'в розницу (от 1000)'
+
                             mes = f"""Покупаем {key1} на BestChange: обменник {exch1['exch']} по курсу {exch1['price']} -> {exch1['out']}
     Обмен на споте на {coin1} по курсу {exch1[coin1]['price']} -> {exch1[coin1]['out']}
-    Продаем на P2P по курсу {exch1[coin1]['p2p']['price']} 
+    Продаем на P2P по курсу {exch1[coin1]['p2p']['price']} {opt} 
     Получаем {exch1[coin1]['p2p']['out']}
     Спред {spreed}"""
                             mas.append(mes)
@@ -179,9 +183,6 @@ class Bundles:
                 continue
             
             for coin2 in coins:
-                # priceSpot = {}
-                if coin1 == 'RUB' and coin2 == 'SHIB':
-                    continue
                 priceSpot = cp.getSpotPrice(coin1, coin2, priceP2P['out']) #{}
                 if priceSpot == -1:
                     continue
@@ -202,9 +203,14 @@ class Bundles:
                         spreed = Spreed(bank, outs[key1][coin]['p2p']['out'])
                         if spreed < spd:
                             continue
+                        opt = ''
+                        if outs[key1][coin]['p2p']['few']:
+                            opt = 'оптом'
+                        else:
+                            opt = 'в розницу (от 1000)'
                         mes = f"""Покупка на P2P {key1} по курсу {outs[key1]['price']} -> {outs[key1]['out']}
     Обмен на споте на {coin} по курсу {outs[key1][coin]['price']} -> {outs[key1][coin]['out']}
-    Продажа {outs[key1][coin]['p2p']['coin']} на P2P по курсу {outs[key1][coin]['p2p']['price']}
+    Продажа {outs[key1][coin]['p2p']['coin']} на P2P по курсу {outs[key1][coin]['p2p']['price']} {opt}
     Получаем {outs[key1][coin]['p2p']['out']}
     Спред: {spreed}"""
                         mas.append(mes)
@@ -258,8 +264,14 @@ class Bundles:
                 spreed = Spreed(bank, outs[key1]['p2p2']['out'])
                 if spreed < spd:
                     continue
+
+                opt = ''
+                if outs[key1]['p2p2']['few']:
+                    opt = 'оптом'
+                else:
+                    opt = 'в розницу (от 1000)'
                 mes = f"""Покупка на P2P {key1} по курсу {outs[key1]['price']} -> {outs[key1]['out']}
-    Продаем на P2P {key1} по курсу {outs[key1]['p2p2']['price']}
+    Продаем на P2P {key1} по курсу {outs[key1]['p2p2']['price']} {opt}
     Получаем {outs[key1]['p2p2']['out']}
     Спред: {spreed}"""
                 mas.append(mes)

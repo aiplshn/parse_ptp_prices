@@ -19,8 +19,14 @@ class ControllerBinance:
         return self.pbs.getAllPrice()
 
     # TODO add fiat
+    # Логика оптово-розничной продажи
     def getPricePtP(self, fiat, payType, asset, trade_type, transAmount):
         return self.ptp.getPrice(payType, asset, trade_type, transAmount)
+        if trade_type == "SELL":
+            pass
+        # если продать
+        # получить наибольшую цену из [few] и [lot]
+        # 
 
     def getAllPtPPrice(self):
         return self.ptp.getAllData()

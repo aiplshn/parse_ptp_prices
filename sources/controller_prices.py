@@ -38,6 +38,8 @@ class ControllerPrices:
 
     def getSpotPrice(self, fiat:str, coin:str, transAmount:float):
         #return self.binance_controller.getPriceSpot(fiat, coin)
+        if (fiat == "RUB" and coin == "SHIB") or (coin == "RUB" and fiat == "SHIB"):
+            return -1
         price, side = self.binance_controller.getPriceSpot(fiat, coin)
         bank_out = 0
         coins = ''
@@ -67,15 +69,26 @@ class ControllerPrices:
 
     def getP2PPriceSell(self, fiat, payType, asset, trade_type, transAmount):
         #return self.binance_controller.getPricePtP(fiat, payType, asset, trade_type, transAmount)
-        price = self.binance_controller.getPricePtP(fiat, payType, asset, trade_type, transAmount)
+        price = -1
+        if transAmount > 1000:
+            few = False
+            price_low = self.binance_controller.getPricePtP(fiat, payType, asset, trade_type, 1000)
+            price_lot = self.binance_controller.getPricePtP(fiat, payType, asset, trade_type, transAmount)
+            if price_lot != -1 or price_low != -1:
+                if price_lot > price_low:
+                    price = price_low
+                    few = True
+                else:
+                    price = price_lot
+                    few = False
+        else:
+            price = self.binance_controller.getPricePtP(fiat, payType, asset, trade_type, transAmount)
+            few = True
+        # price = self.binance_controller.getPricePtP(fiat, payType, asset, trade_type, transAmount)
         if price == -1:
             return -1
-        #out = 0
-        #if trade_type == "BUY":
-        #    out = transAmount / price
-        #else:
         out = transAmount * price
-        return {'coin': asset, 'price':price, 'out': out}
+        return {'coin': asset, 'price':price, 'out': out, 'few': few}
 
     def getBestPricesBestChangeForBuy(self, fiat:str, coin:str, transAmount:str, bank:str, id_connection: int):
         #return self.best_change_controller.getBestPriceExch(fiat, coin, transAmount, bank, True)
