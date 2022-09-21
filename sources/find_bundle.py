@@ -72,7 +72,7 @@ class Bundles:
         mas = []
         for key1 in outs.keys():
             for exch in outs[key1]:
-                if exch['p2p']['out'] > bank:
+                if 'p2p' in exch and exch['p2p']['out'] > bank:
                     spreed = Spreed(bank, exch['p2p']['out'])
                     if spreed < spd:
                         continue
