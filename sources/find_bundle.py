@@ -45,10 +45,10 @@ class Bundles:
                                 if spreed < spd:
                                     continue
                                 mes = f"""Покупка на P2P {key1} по курсу {outs[key1]['price']} -> {outs[key1]['out']}
-    Обмен на споте на {key2} по курсу {outs[key1][key2]['price']} -> {outs[key1][key2]['out']}
-    Продажа на BestChange: обменник {exch['exch']} по курсу {exch['price']}
-    Получаем {exch['out']}
-    Спред: {spreed}"""
+Обмен на споте на {key2} по курсу {outs[key1][key2]['price']} -> {outs[key1][key2]['out']}
+Продажа на BestChange: обменник {exch['exch']} по курсу {exch['price']}
+Получаем {exch['out']}
+Спред: {spreed}"""
                                 mas.append(mes)
         return mas
 
@@ -82,9 +82,9 @@ class Bundles:
                     else:
                         opt = 'в розницу (от 1000)'
                     mes = f"""Покупаем {key1} на BestChange: обменник {exch['exch']} по курсу {exch['price']} -> {exch['out']}
-    Продаем {key1} на P2P по курсу {exch['p2p']['price']} {opt}
-    Получаем {exch['p2p']['out']}
-    Спред {spreed}"""
+Продаем {key1} на P2P по курсу {exch['p2p']['price']} {opt}
+Получаем {exch['p2p']['out']}
+Спред {spreed}"""
                     mas.append(mes)
         return mas
 
@@ -121,10 +121,10 @@ class Bundles:
                                 if spreed < spd:
                                     continue
                                 mes = f"""Покупаем {key1} на BestChange: обменник {exch1['exch']} по курсу {exch1['price']} -> {exch1['out']}
-    Обмен на споте на {coin1} по курсу {exch1[coin1]['price']} -> {exch1[coin1]['out']}
-    Продаем на BestChange: обменник {exch2['exch']} по курсу {exch2['price']}
-    Получаем {exch2['out']}
-    Спред {spreed}"""
+Обмен на споте на {coin1} по курсу {exch1[coin1]['price']} -> {exch1[coin1]['out']}
+Продаем на BestChange: обменник {exch2['exch']} по курсу {exch2['price']}
+Получаем {exch2['out']}
+Спред {spreed}"""
                                 mas.append(mes)
         return mas
 
@@ -167,10 +167,10 @@ class Bundles:
                                 opt = 'в розницу (от 1000)'
 
                             mes = f"""Покупаем {key1} на BestChange: обменник {exch1['exch']} по курсу {exch1['price']} -> {exch1['out']}
-    Обмен на споте на {coin1} по курсу {exch1[coin1]['price']} -> {exch1[coin1]['out']}
-    Продаем на P2P по курсу {exch1[coin1]['p2p']['price']} {opt} 
-    Получаем {exch1[coin1]['p2p']['out']}
-    Спред {spreed}"""
+Обмен на споте на {coin1} по курсу {exch1[coin1]['price']} -> {exch1[coin1]['out']}
+Продаем на P2P по курсу {exch1[coin1]['p2p']['price']} {opt}
+Получаем {exch1[coin1]['p2p']['out']}
+Спред {spreed}"""
                             mas.append(mes)
         return mas
 
@@ -209,10 +209,10 @@ class Bundles:
                         else:
                             opt = 'в розницу (от 1000)'
                         mes = f"""Покупка на P2P {key1} по курсу {outs[key1]['price']} -> {outs[key1]['out']}
-    Обмен на споте на {coin} по курсу {outs[key1][coin]['price']} -> {outs[key1][coin]['out']}
-    Продажа {outs[key1][coin]['p2p']['coin']} на P2P по курсу {outs[key1][coin]['p2p']['price']} {opt}
-    Получаем {outs[key1][coin]['p2p']['out']}
-    Спред: {spreed}"""
+Обмен на споте на {coin} по курсу {outs[key1][coin]['price']} -> {outs[key1][coin]['out']}
+Продажа {outs[key1][coin]['p2p']['coin']} на P2P по курсу {outs[key1][coin]['p2p']['price']} {opt}
+Получаем {outs[key1][coin]['p2p']['out']}
+Спред: {spreed}"""
                         mas.append(mes)
         return mas
 
@@ -239,9 +239,9 @@ class Bundles:
                     if spreed < spd:
                         continue
                     mes = f"""Покупка на P2P {key1} по курсу {outs[key1]['price']} -> {outs[key1]['out']}
-    Продаем на BestChange: обменник {exch['exch']} по курсу {exch['price']}
-    Получаем {exch['out']}
-    Спред: {spreed}"""
+Продаем на BestChange: обменник {exch['exch']} по курсу {exch['price']}
+Получаем {exch['out']}
+Спред: {spreed}"""
                     mas.append(mes)
         return mas
 
@@ -271,9 +271,9 @@ class Bundles:
                 else:
                     opt = 'в розницу (от 1000)'
                 mes = f"""Покупка на P2P {key1} по курсу {outs[key1]['price']} -> {outs[key1]['out']}
-    Продаем на P2P {key1} по курсу {outs[key1]['p2p2']['price']} {opt}
-    Получаем {outs[key1]['p2p2']['out']}
-    Спред: {spreed}"""
+Продаем на P2P {key1} по курсу {outs[key1]['p2p2']['price']} {opt}
+Получаем {outs[key1]['p2p2']['out']}
+Спред: {spreed}"""
                 mas.append(mes)
         return mas
 
