@@ -1,7 +1,7 @@
 # Названия банков в бинансе и bestChange
 # И перевод 
 
-banks_binance = ["Tinkoff",  "QIWI", "YandexMoney", "RosBank",  "RUBfiatbalance"]
+banks_binance = ["TinkoffNew",  "QIWI", "YandexMoneyNew", "RosBankNew",  "RUBfiatbalance"]
 banks_bc      = ["Тинькофф", "QIWI", "ЮMoney",      "Сбербанк", "Binance"]
 
 
