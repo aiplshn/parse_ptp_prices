@@ -38,6 +38,8 @@ class ControllerPrices:
         #return self.binance_controller.getPriceSpot(fiat, coin)
         if (fiat == "RUB" and coin == "SHIB") or (coin == "RUB" and fiat == "SHIB"):
             return -1
+        if coin == 'SHIB' or fiat == 'SHIB':
+            return -1
         price, side = self.binance_controller.getPriceSpot(fiat, coin)
         bank_out = 0
         coins = ''
