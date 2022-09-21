@@ -27,7 +27,6 @@ class ControllerPrices:
     def update(self):
         while True:
             self.best_change_controller.update()
-            self.binance_controller.update()
             time.sleep(960)            
             now = datetime.datetime.now()
             print("Time out "+str(now))
