@@ -132,3 +132,6 @@ class ControllerPrices:
             mas.append(data)
 
         return mas
+
+    def close_all_connections(self):
+        self.best_change_controller.closeAllConnections()
